@@ -6,8 +6,8 @@ const categoryRouter = express.Router();
 // Create a new category
 categoryRouter.post('/api/categories', async (req, res) => {
   try {
-    const { name ,image } = req.body; // Destructuring to extract only the 'name' property
-    const category = new Category({ name , image}); // Passing 'name' ,'image' directly to the Category constructor
+    const { name ,image , banner} = req.body; // Destructuring to extract only the 'name' property
+    const category = new Category({ name , image, banner}); // Passing 'name' ,'image' directly to the Category constructor
     await category.save();
     res.status(201).send(category);
   } catch (error) {
