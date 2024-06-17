@@ -15,6 +15,29 @@ subCategoryRouter.post('/api/subcategory', async (req, res) => {
    }
 });
 
+
+subCategoryRouter.get('/api/subcategories',async (req, res) => {
+    try {
+       const subcategories = await  SubCategory.find();
+        return res.status(200).json(subcategories);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+subCategoryRouter.get('/api/subcategory/grocery', async (req, res) => {
+    try {
+        const grocerySubcategories = await SubCategory.find({ categoryName: "Grocery" });
+        
+        if (!grocerySubcategories || grocerySubcategories.length === 0) {
+            return res.status(404).json({ msg: "Grocery subcategories not found" });
+        }
+
+        res.status(200).json(grocerySubcategories);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 //get categoryName
 // subCategoryRouter.get('/api/category/:categoryName', async (req, res) => {
 //     try {

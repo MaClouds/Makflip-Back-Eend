@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { productSchema } = require('./product_model');
 
 
-const userSchema = mongoose.Schema({
+const sellerSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema({
     },
     type: {
         type: String,
-        default: "user"
+        default: "seller"
     },
 
 
@@ -38,6 +38,6 @@ const userSchema = mongoose.Schema({
     
 });
 
-const User = mongoose.model("User", userSchema);
+const Seller = mongoose.model("Seller", sellerSchema);
 
-module.exports = User;
+module.exports = Seller;

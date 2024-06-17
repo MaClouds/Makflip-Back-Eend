@@ -13,6 +13,8 @@ const bannerRouter = require('./routes/banner');
 const productRouter = require('./routes/product');
 const subCategoryRouter = require('./routes/subcategory');
 const orderRouter = require("./routes/user");
+const courseRouter = require('./routes/course');
+const sellerRouter = require('./routes/seller')
 
 // Use CORS middleware
 app.use(cors()); // This allows all origins. You can configure it further if needed.
@@ -24,7 +26,8 @@ app.use(bannerRouter);
 app.use(productRouter);
 app.use(subCategoryRouter);
 app.use(orderRouter);
-
+app.use(courseRouter)
+app.use(sellerRouter)
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(Db).then(() => {

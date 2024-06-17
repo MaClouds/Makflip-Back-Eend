@@ -6,8 +6,8 @@ const productRouter = express.Router();
 productRouter.post('/post/add-product',async (req, res) => {
 
     try {
-    const {productName, productPrice, discount,quantity,description,category, images } = req.body;
-    const product = new Product({productName, productPrice, discount,quantity,description,category, images,  });
+    const {productName, productPrice, discount,quantity,description,category,subCategory, images } = req.body;
+    const product = new Product({productName, productPrice, discount,quantity,description,category, subCategory,images,  });
     
     await product.save();
     res.status(201).send(product);
@@ -49,7 +49,20 @@ productRouter.get('/category/products', async (req, res) => {
         res.status(500).json({ error: error.message }); // Send error response
     }
 });
-
+productRouter.get('/subcategory/products', async (req, res) => {
+  try {
+      const subCategory = req.query.subCategory;
+      let products;
+      if (subCategory) {
+          products = await Product.find({ subCategory: subCategory });
+      } else {
+          products = await Product.find();
+      }
+      res.status(200).json(products);
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
 
 // / Add a new route to get recommended products
 productRouter.get('/api/recommended-products', async (req, res) => {
