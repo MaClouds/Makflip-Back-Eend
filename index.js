@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors'); // Import CORS package
 const app = express();
 
-Db = "mongodb+srv://macaulayfamous:beejaymac@cluster0.kkep68t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+Db = "mongodb+srv://Makflip:Makflip123@cluster0.jm0pctz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+// Db = "mongodb+srv://macaulayfamous:beejaymac@cluster0.kkep68t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // Import routes
 const authRouter = require("./routes/auth");
