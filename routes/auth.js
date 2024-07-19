@@ -109,6 +109,19 @@ authRouter.post('/api/signout', auth, async (req, res) => {
    }
  });
  
- 
+ // delete account
+authRouter.delete('/api/delete', auth, async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.user);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    res.json({ msg: 'User account deleted successfully' });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 
 module.exports = authRouter;
