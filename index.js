@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import CORS package
 const app = express();
-
-const DB = "mongodb+srv://macaulayfamous:beejaymac@cluster0.1sqrhdg.mongodb.net/";
+git
+const Db = "mongodb+srv://macaulayfamous:beejaymac@cluster0.1sqrhdg.mongodb.net/";
 // Db = "mongodb+srv://Makflip:Makflip123@cluster0.jm0pctz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 // Db = "mongodb+srv://macaulayfamous:beejaymac@cluster0.kkep68t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
