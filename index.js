@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 //mongodb connection  String
-const DB =const DB = "mongodb+srv://macaulayfamous:beejaymac@cluster0.1sqrhdg.mongodb.net/"
+const DB  = "mongodb+srv://macaulayfamous:beejaymac@cluster0.1sqrhdg.mongodb.net/"
 app.use(express.json());
 app.use(cors());///enable cors for all routes and origin
 app.use(authRouter);
