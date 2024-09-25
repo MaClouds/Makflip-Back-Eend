@@ -1,41 +1,40 @@
+//import the express module
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors'); // Import CORS package
-const app = express();
-
-// const Db = "mongodb+srv://macaulayfamous:beejaymac@cluster0.1sqrhdg.mongodb.net/";
-Db = "mongodb+srv://Makflip:Makflip1@cluster0.y7lzb.mongodb.net/";
-// Db = "mongodb+srv://macaulayfamous:beejaymac@cluster0.kkep68t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-// Import routes
-const authRouter = require("./routes/auth");
-const { auth } = require('./middleware/auth');
-const categoryRouter = require('./routes/category');
+const mongoose = require("mongoose");
+const authRouter = require('./routes/auth');
 const bannerRouter = require('./routes/banner');
+const categoryRouter = require('./routes/category');
+const subcategoryRouter = require('./routes/sub_category');
 const productRouter = require('./routes/product');
-const subCategoryRouter = require('./routes/subcategory');
-const orderRouter = require("./routes/user");
-const courseRouter = require('./routes/course');
-const sellerRouter = require('./routes/seller')
+const productReviewRouter = require('./routes/product_review');
+const vendorRouter = require('./routes/vendor');
+const orderRouter = require('./routes/order');
+const cors = require('cors'); 
+//Defind the port number the server will listen on
+const PORT = process.env.PORT || 3000;
 
-// Use CORS middleware
-app.use(cors()); // This allows all origins. You can configure it further if needed.
+//create an instance of an express application
+//because it give us the starting point
 
+const app = express();
+//mongodb connection  String
+const DB ="mongodb+srv://Makflip:Makflip1@cluster0.y7lzb.mongodb.net/";
 app.use(express.json());
+app.use(cors());///enable cors for all routes and origin
 app.use(authRouter);
-app.use(categoryRouter);
 app.use(bannerRouter);
+app.use(categoryRouter);
+app.use(subcategoryRouter);
 app.use(productRouter);
-app.use(subCategoryRouter);
+app.use(productReviewRouter);
+app.use(vendorRouter);
 app.use(orderRouter);
-app.use(courseRouter)
-app.use(sellerRouter)
-const PORT = process.env.PORT || 5000;
-
-mongoose.connect(Db).then(() => {
-  console.log('connected');
-})
-
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
+mongoose.connect(DB).then(()=>{
+ console.log('mongodb connected');
 });
+
+//start the server and listen on the specified port 
+app.listen(PORT,"0.0.0.0", function(){
+    //LOG THE NUMBER 
+    console.log(`server is running on port ${PORT}`);
+} );
