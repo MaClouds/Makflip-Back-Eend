@@ -1,10 +1,9 @@
 const express = require('express');
 const orderRouter = express.Router();
 const Order = require('../models/order');  // Import the order schema
-const stripe = require('stripe')('sk_test_51KIMtISHK7ZlTNubmdCUbIxA2abmq2gTj6IDRZJ6fjywj4cJX4GwLWbVHI20uWca4gjM1gD1hiAHytzlOKfdvN1p00pE2LN3mo');  // Your secret Stripe key
-
+const {auth}= require('../middleware/auth');
 // POST route to create a new order
-orderRouter.post('/api/orders', async (req, res) => {
+orderRouter.post('/api/orders', auth, async (req, res) => {
     try {
         const order = new Order({
             fullName: req.body.fullName,
@@ -30,7 +29,7 @@ orderRouter.post('/api/orders', async (req, res) => {
 });
 
 // GET route to fetch all orders
-orderRouter.get('/api/orders', async (req, res) => {
+orderRouter.get('/api/orders', auth, async (req, res) => {
     try {
         const orders = await Order.find({});
         res.status(200).json(orders);
@@ -40,7 +39,7 @@ orderRouter.get('/api/orders', async (req, res) => {
 });
 
 // GET route to fetch a specific order by ID
-orderRouter.get('/api/orders/:id', async (req, res) => {
+orderRouter.get('/api/orders/:id',auth, async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
         if (order) {
@@ -55,7 +54,7 @@ orderRouter.get('/api/orders/:id', async (req, res) => {
 
 
 // DELETE route to delete an order by ID
-orderRouter.delete('/api/orders/:id', async (req, res) => {
+orderRouter.delete('/api/orders/:id',auth, async (req, res) => {
     try {
         const { id } = req.params;
         const deletedOrder = await Order.findByIdAndDelete(id);
