@@ -1,10 +1,11 @@
 const express = require('express');
 const ProductReview = require('../models/product_review');
 const Product = require('../models/product');
+const {auth, vendorAuth} = require('../middleware/auth');
 
 const productReviewRouter = express.Router();
 
-productReviewRouter.post('/api/product-review', async (req, res) => {
+productReviewRouter.post('/api/product-review', auth, async (req, res) => {
   try {
       const { buyerId, email, fullName, productId, rating, review } = req.body;
       //check if the user has already reviewed the product 
