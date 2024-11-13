@@ -4,7 +4,7 @@ const Order = require('../models/order');  // Import the order schema
 const {auth}= require('../middleware/auth');
 // POST route to create a new order
 // POST route to create a new order
-orderRouter.post('/api/orders', async (req, res) => {
+orderRouter.post('/api/orders', auth, async (req, res) => {
     try {
         const order = new Order({
             fullName: req.body.fullName,
