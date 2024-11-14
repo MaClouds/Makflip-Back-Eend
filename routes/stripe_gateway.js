@@ -10,10 +10,10 @@ stripeRouter.post('/create-payment-intent', async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount,
       currency: currency,
-      payment_method_types: payment_method ? [payment_method] : ['card'], // Default to 'card'
+      payment_method_types: payment_method ? [payment_method] : ['card', 'paypal',], // Default to 'card'
     });
 
-    res.send({ client_secret: paymentIntent.client_secret });
+    res.send({ paymentIntent: paymentIntent});
   } catch (error) {
     console.error('Error creating payment intent:', error);
     res.status(500).send({ error: error.message });
