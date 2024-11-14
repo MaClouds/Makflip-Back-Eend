@@ -3,6 +3,7 @@ const orderRouter = express.Router();
 const Order = require('../models/order');  // Import the order schema
 const {auth}= require('../middleware/auth');
 // POST route to create a new order
+// POST route to create a new order
 orderRouter.post('/api/orders', auth, async (req, res) => {
     try {
         const order = new Order({
@@ -19,6 +20,9 @@ orderRouter.post('/api/orders', auth, async (req, res) => {
             buyerId: req.body.buyerId,
             vendorId: req.body.vendorId,
             createdAt: Date.now(),
+            paymentMethod: req.body.paymentMethod,
+            paymentStatus: req.body.paymentStatus,
+            transactionId: req.body.transactionId,
         });
 
         const createdOrder = await order.save();
@@ -27,7 +31,6 @@ orderRouter.post('/api/orders', auth, async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
 // GET route to fetch all orders
 orderRouter.get('/api/orders', auth, async (req, res) => {
     try {
